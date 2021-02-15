@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { Map } = require('immutable')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
@@ -15,9 +16,12 @@ app.use('/', express.static(path.join(__dirname, '../public')))
 // your API calls
 
 // example API call
+// Adds data to /apod
 app.get('/apod', async (req, res) => {
+    let roverName = req.get('roverName');
+    console.log("API called for:", roverName);
     try {
-        let image = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`)
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${process.env.API_KEY}`)
             .then(res => res.json())
         res.send({ image })
     } catch (err) {
