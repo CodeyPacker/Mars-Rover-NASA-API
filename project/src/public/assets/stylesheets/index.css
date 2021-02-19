@@ -8,9 +8,7 @@ body {
   margin: 0;
 }
 
-header {
-  /* header styles */
-}
+body * { box-sizing: border-box; }
 
 main {
   flex: 1;
@@ -20,12 +18,32 @@ footer {
   /* footer styles */
 }
 
+section {
+  padding: 30px 15px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+  padding: 15px;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 30px;
+  margin: 0 0 25px;
+}
+
 .hero {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0;
+  max-width: 100%;
 }
 
 .hero::before {
@@ -52,15 +70,77 @@ footer {
   position: absolute;
 }
 
+button {
+  background-color: #0B3D91;
+  color: white;
+  padding: 25px 10px;
+  font-size: 25px;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+button:last-of-type {
+  margin-bottom: 0;
+}
+
+.select-rover {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.rover-stats-card {
+  margin: auto;
+  border-radius: 4px;
+  padding: 20px 15px;
+  box-shadow: 0 20px 20px rgba(0, 0, 20, .2), 0 0 50px rgba(0, 0, 20, .2);
+}
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  /* use mobile */
+  /* use tablet */
+  section {
+    padding: 45px 15px;
+  }
+
+  section h2 {
+    margin: 0 0 50px;
+    font-size: 50px;
+  }
+
+  .dashboard {
+    display: flex;
+  }
+
+  .rover-stats {
+    margin-left: 30px;
+    width: 50%;
+    align-items: center;
+  }
+
+  .rover-stats-card {
+    width: 100%;
+    height: 100%;
+  }
+
+  .select-rover {
+    width: 50%;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
+  section {
+    padding: 60px 15px;
+  }
+
   .hero {
     height: 100vh;
   }
@@ -68,6 +148,14 @@ footer {
   .hero h1 {
     font-size: 64px;
   }
+
+  h2 {
+    font-size: 60px;
+  }
+
+  /* .rover-stats {
+    min-width: 500px;
+  } */
 }
 
 /* -------------------  LARGE SCREENS  -------------- */

@@ -26,11 +26,23 @@ const App = (state) => {
         <header></header>
         <main>
             <section class="hero">
-                <h1>Rovers are cool af 😎</h2>
+                <h1>Rover Dashboard</h2>
                 ${ImageOfTheDay(apod)}
             </section>
             <section>
-                ${rover(roverData)}
+                <h2>Choose a Rover</h2>
+                <div class="dashboard">
+                    <div class="select-rover">
+                        <button value="curiosity">Curiosity</button>
+                        <button value="opportunity">Opportunity</button>
+                        <button value="spirit">Spirit</button>
+                    </div>
+                    <div class="rover-stats">
+                        <div class="rover-stats-card">
+                            ${roverStats(roverData)}
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
         <footer></footer>
@@ -44,24 +56,18 @@ window.addEventListener('load', () => {
 
 // ------------------------------------------------------  COMPONENTS
 
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Welcome, ${name}!</h1>
-        `
-    }
-
-    return `
-        <h1>Hello!</h1>
-    `
-}
-
-const rover = (data) => {
+const roverStats = (data) => {
     if (!data) { getRover(store) }
-    let {id, landing_date: landingDate, launch_date: launchDate, name, status} = data[store.currentRover].photos[0].rover
+    const {id, landing_date: landingDate, launch_date: launchDate, name, status} = data[store.currentRover].photos[0].rover
     return `
-        <h2>${name}</h2>
+        <h3>${name}</h3>
+        <div class="info-card">
+            <ul>
+                <li>Launch date: ${launchDate}</li>
+                <li>Landing date: ${landingDate}</li>
+                <li>Status: ${status}</li>
+            </ul>
+        </div>
     `
 }
 
