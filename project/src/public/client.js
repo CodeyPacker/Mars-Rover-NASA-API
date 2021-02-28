@@ -22,7 +22,6 @@ const App = (state) => {
   const currentRover = state.get("currentRover");
   const roverData = state.get("data");
   return `
-    <header></header>
     <main>
       <section class="hero ${!apod && "hide"}">
         <h1>Rover Dashboard</h2>
@@ -64,7 +63,7 @@ window.addEventListener("load", () => {
       const rovers = Immutable.Map({ data });
       updateStore(store, rovers);
     });
-  }, 2000);
+  }, 3000);
 });
 
 // ------------------------------------------------------  COMPONENTS
