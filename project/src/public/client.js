@@ -1,4 +1,4 @@
-const store = Immutable.Map({
+let store = Immutable.Map({
   currentRover: "curiosity",
   rovers: ["Curiosity", "Opportunity", "Spirit"],
 });
@@ -6,9 +6,9 @@ const store = Immutable.Map({
 // add our markup to the page
 const root = document.getElementById("root");
 
-const updateStore = (store, newState) => {
-  const newStore = store.merge(newState);
-  render(root, newStore);
+const updateStore = (state, newState) => {
+  store = state.merge(newState);
+  render(root, store);
 };
 
 const render = async (root, state) => {
