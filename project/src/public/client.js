@@ -24,7 +24,7 @@ const App = (state) => {
   return `
     <header></header>
     <main>
-      <section class="hero">
+      <section class="hero ${!apod && "hide"}">
         <h1>Rover Dashboard</h2>
         ${imageOfTheDay(apod)}
       </section>
@@ -54,15 +54,17 @@ const App = (state) => {
 
 // listening for load event because page should load before any JS is called
 window.addEventListener("load", () => {
-  render(root, store);
-  getImageOfTheDay((image) => {
-    const apod = Immutable.Map({ image });
-    updateStore(store, apod);
-  });
-  getRoverData((data) => {
-    const rovers = Immutable.Map({ data });
-    updateStore(store, rovers);
-  });
+  setTimeout(() => {
+    render(root, store);
+    getImageOfTheDay((image) => {
+      const apod = Immutable.Map({ image });
+      updateStore(store, apod);
+    });
+    getRoverData((data) => {
+      const rovers = Immutable.Map({ data });
+      updateStore(store, rovers);
+    });
+  }, 2000);
 });
 
 // ------------------------------------------------------  COMPONENTS
@@ -91,28 +93,12 @@ const roverStats = (data, selectedRover) => {
 
 // Example of a pure function that renders infomation requested from the backend
 const imageOfTheDay = (apod) => {
+  console.log(apod);
   if (apod === undefined) {
-    return;
+    return `
+      <h3>loading...</h3>
+    `;
   }
-  // If image does not already exist, or it is not from today -- request it again
-  // const today = new Date();
-  // const photodate = new Date(apod.date);
-
-  // if (!apod || apod.date === today.getDate()) {
-  //   getImageOfTheDay((image) => {
-  //     const apod = Immutable.Map({ image });
-  //     updateStore(store, apod);
-  //   });
-  // }
-
-  // check if the photo of the day is actually type video!
-  // if (apod.media_type === "video") {
-  //   return `
-  //           <p>See today's featured video <a href="${apod.url}">here</a></p>
-  //           <p>${apod.title}</p>
-  //           <p>${apod.explanation}</p>
-  //       `;
-  // } else {
 
   return `
     <img src="${apod.image.url}" height="100%" width="100%" />

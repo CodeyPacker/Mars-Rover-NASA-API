@@ -16,13 +16,14 @@ main {
   flex: 1;
 }
 
-.loading {
-  height: 100vh;
-  width: 100vw;
+/* .loading {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  height: 100vh;
+  width: 100vw;
+} */
 
 footer {
   /* footer styles */
@@ -54,6 +55,7 @@ section h2 {
   align-items: center;
   padding: 0;
   max-width: 100%;
+  max-height: 100vh;
 }
 
 .hero::before {
@@ -72,6 +74,7 @@ section h2 {
 
 .hero img {
   object-fit: cover;
+  max-height: 100vh;
 }
 
 .hero h1 {
@@ -228,4 +231,34 @@ button:last-of-type {
 
 @media (min-width: 1824px) {
   /* test */
+}
+
+.hide {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #0b3d91; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
