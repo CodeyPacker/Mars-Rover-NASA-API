@@ -6,9 +6,8 @@ const store = Immutable.Map({
 // add our markup to the page
 const root = document.getElementById("root");
 
-const updateStore = (store, newState = {}) => {
-  console.log(newState);
-  const newStore = store.mergeDeep(newState);
+const updateStore = (store, newState = {}, prop) => {
+  const newStore = store.merge(newState);
   render(root, newStore);
 };
 
@@ -56,13 +55,13 @@ const App = (state) => {
 // listening for load event because page should load before any JS is called
 window.addEventListener("load", () => {
   render(root, store);
-  getRoverData((data) => {
-    const rovers = Immutable.Map({ data });
-    updateStore(store, rovers);
-  });
   getImageOfTheDay((image) => {
     const apod = Immutable.Map({ image });
     updateStore(store, apod);
+  });
+  getRoverData((data) => {
+    const rovers = Immutable.Map({ data });
+    updateStore(store, rovers);
   });
 });
 
@@ -92,6 +91,9 @@ const roverStats = (data, selectedRover) => {
 
 // Example of a pure function that renders infomation requested from the backend
 const imageOfTheDay = (apod) => {
+  if (apod === undefined) {
+    return;
+  }
   // If image does not already exist, or it is not from today -- request it again
   // const today = new Date();
   // const photodate = new Date(apod.date);
@@ -111,9 +113,7 @@ const imageOfTheDay = (apod) => {
   //           <p>${apod.explanation}</p>
   //       `;
   // } else {
-  if (apod === undefined) {
-    return;
-  }
+
   return `
             <img src="${apod.image.url}" height="100%" width="100%" />
         `;
