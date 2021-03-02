@@ -67,7 +67,7 @@ window.addEventListener("load", () => {
 });
 
 // ------------------------------------------------------  COMPONENTS
-
+// Pure function
 const roverStats = (data, selectedRover) => {
   if (data === undefined) {
     return;
@@ -90,7 +90,7 @@ const roverStats = (data, selectedRover) => {
   `;
 };
 
-// Example of a pure function that renders infomation requested from the backend
+// Pure function
 const imageOfTheDay = (apod) => {
   console.log(apod);
   if (apod === undefined) {
@@ -106,6 +106,7 @@ const imageOfTheDay = (apod) => {
 
 // ------------------------------------------------------  API CALLS
 
+// Higher Order Function that returns a UI element
 const getPhotoHtml = (photoArray) => {
   return photoArray.map((photo) => {
     const { earth_date: earthDate, img_src: src, camera } = photo;
@@ -122,6 +123,7 @@ const getPhotoHtml = (photoArray) => {
   });
 };
 
+// Pure function
 const roverImages = (rover, data) => {
   if (data === undefined) {
     return;
@@ -129,19 +131,19 @@ const roverImages = (rover, data) => {
   return getPhotoHtml(data[rover].photos).join(" ");
 };
 
+// Higher Order Function that returns a UI element
 const createButtons = (state) => {
   const rovers = state.get("rovers");
-  const buttonArr = rovers.map((rover) => {
+  return (buttonArr = rovers.map((rover) => {
     return `
       <button class="update-rover" value="${rover}">${rover}</button>
     `;
-  });
-  return buttonArr;
+  }));
 };
 
+// Pure function
 const handleUpdateRover = (state, rover) => {
-  newRover = rover;
-  const newState = state.set("currentRover", newRover);
+  const newState = state.set("currentRover", rover);
   updateStore(state, newState);
 };
 
@@ -154,12 +156,14 @@ const buttonListeners = (state) => {
   );
 };
 
+// Higher Order Function
 const getImageOfTheDay = (callback) => {
   fetch("http://localhost:3000/apod")
     .then((res) => res.json())
     .then((json) => callback(json));
 };
 
+// Higher Order Function
 const getRoverData = (callback) => {
   fetch("http://localhost:3000/rovers")
     .then((res) => res.json())
