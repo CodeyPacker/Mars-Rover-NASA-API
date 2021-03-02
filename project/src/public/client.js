@@ -92,7 +92,6 @@ const roverStats = (data, selectedRover) => {
 
 // Pure function
 const imageOfTheDay = (apod) => {
-  console.log(apod);
   if (apod === undefined) {
     return `
       <h3>loading...</h3>
